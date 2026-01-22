@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Scraping Detik</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .row-berita {
+            display: grid;
+            grid-template-columns: 50px 220px 1fr;
+            border: 2px solid white;
+            margin-bottom: 6px;
+            min-height: 120px;
+            align-items: center;
+        }
+
+        .row-berita.merah {
+            background-color: red;
+        }
+
+        .row-berita.hijau {
+            background-color: #00ff00;
+        }
+
+        .no {
+            font-weight: bold;
+            text-align: center;
+            border-right: 2px solid white;
+        }
+
+        .gambar img {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+        }
+
+        .judul {
+            padding: 10px;
+        }
+
+        .judul a {
+            color: blue;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container d-flex justify-content-between">
+            <div>
+                <a class="nav-link d-inline text-white me-3" href="/">Home</a>
+                <a class="nav-link d-inline text-white" href="/detik-populer">Berita Terkini</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+
+        {% for d in data %}
+        <div class="row-berita {{ d.color }}">
+
+            <div class="no">{{ d.no }}</div>
+
+            <div class="gambar">
+                <img src="{{ d.img }}">
+            </div>
+
+            <div class="judul">
+                <a href="{{ d.link }}" target="_blank">{{ d.title }}</a>
+                <div class="text-dark small">{{ d.date }}</div>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
